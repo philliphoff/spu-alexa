@@ -12,9 +12,15 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.0.35",
     "delete": "^0.3.2",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.1.6",
     "typescript": "^2.2.2"
+  },
+  "dependencies": {
+    "alexa-app": "^4.0.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2"
   }
 }
