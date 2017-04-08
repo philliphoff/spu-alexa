@@ -25,7 +25,7 @@ function getCollectionDays(address: string): Promise<spu.ICollectionDay[]> {
 }
 
 app.intent(
-    'collection-day',
+    'GetCollectionDayIntent',
     {
         'slots': { },
         'utterances': [
