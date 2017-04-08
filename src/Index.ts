@@ -9,22 +9,32 @@ function getAddress(request): string {
     return process.env.SPU_ADDRESS;
 }
 
+function getCollectionDays(address: string): Promise<spu.ICollectionDay[]> {
+    return new Promise(
+        (resolve, reject) => {
+            spu.getCollectionDays(
+                address,
+                (err, days) => {
+                    if (err) {
+                        return reject(err);
+                    };
+
+                    resolve(days);
+                });
+        });
+}
+
 app.intent(
     'collection-day',
     {
         'slots': { },
         'utterances': [
-            'when is collection day'
+            '{when\'s | when is} {collection | pick up | trash | garbage} day'
         ]
     },
-
     function(request, response) {
-        return new Promise((resolve, reject) => {
-            spu.getCollectionDays(getAddress(request), (err, days) => {
-                if (err) {
-                    return reject(err);
-                }
-
+        return getCollectionDays(getAddress(request))
+            .then(days => {
                 const sortedDays = [...days].sort((a, b) => b.date.valueOf() - a.date.valueOf()); 
                 
                 const now = new Date();
@@ -38,11 +48,7 @@ app.intent(
                 else {
                     response.say('Sorry, but I could not find any future collection days.');
                 }
-                
-                resolve();
             });
-        });
-    }
-);
+    });
 
 export = app;
