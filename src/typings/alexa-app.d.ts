@@ -29,10 +29,15 @@ declare module 'alexa-app' {
         say(text: string): void;
     }
 
+    export interface IAlexaSchema {
+        slots: {};
+        utterances: string[];
+    }
+
     export interface IAlexaApp {
         intent(
             name: string,
-            schema: {},
+            schema: IAlexaSchema,
             handler: (request: IAlexaRequest, response: IAlexaResponse) => void
         ): void;
     }
