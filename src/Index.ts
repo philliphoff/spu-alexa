@@ -4,7 +4,7 @@ import * as spu from 'spu-api';
 
 const app = new alexa.app('spu');
 
-function getAddress(request): string {
+function getAddress(request: alexa.IAlexaRequest): string {
     // TODO: Look for device address in request.
     return process.env.SPU_ADDRESS;
 }
