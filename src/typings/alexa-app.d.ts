@@ -13,6 +13,7 @@ declare module 'alexa-app' {
     }
 
     export interface IAlexaSystem {
+        apiEndpoint: string;
         device: IAlexaDevice;
         user: IAlexaUser;
     }

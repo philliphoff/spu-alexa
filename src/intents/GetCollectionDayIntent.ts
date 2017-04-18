@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 
 import { getCollectionDaysAsync, getNextCollectionDay } from '../CollectionDays';
-import { getAddress } from '../DeviceAddress';
+import { getAddressForRequestAsync } from '../DeviceAddress';
 import IAlexaIntent from './IAlexaIntent';
 
 export const intent: IAlexaIntent = {
@@ -13,7 +13,8 @@ export const intent: IAlexaIntent = {
         ]
     },
     handler: (request, response) => {
-        return getCollectionDaysAsync(getAddress(request))
+        return getAddressForRequestAsync(request)
+            .then(address => getCollectionDaysAsync(address))
             .then(days => {
                 const day = getNextCollectionDay(days);
 
