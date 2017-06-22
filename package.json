@@ -1,6 +1,6 @@
 {
   "name": "spu-alexa",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "An Alexa skill for Seattle Public Utilities services.",
   "main": "lib/Index.js",
   "author": {

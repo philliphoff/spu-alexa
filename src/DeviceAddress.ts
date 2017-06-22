@@ -12,6 +12,10 @@ interface IDeviceAddress {
 }
 
 function getAddressForDeviceAsync(apiEndpoint: string, deviceId: string, consentToken: string): Promise<string> {
+    const url = `${apiEndpoint}/v1/devices/${deviceId}/settings/address`;
+
+    console.log(`URL: ${url}`);
+
     return new Promise((resolve, reject) => {
         request({
             headers: {
@@ -19,7 +23,7 @@ function getAddressForDeviceAsync(apiEndpoint: string, deviceId: string, consent
             },
             method: 'GET',
             json: true,
-            url: `${apiEndpoint}/v1/devices/${deviceId}/settings/address`,
+            url,
         },
         (err, res, body: IDeviceAddress) => {
             if (err) {
@@ -42,9 +46,15 @@ export function getAddressForRequestAsync(request: alexa.IAlexaRequest): Promise
         return Promise.resolve(envAddress);
     }
 
+    console.log(request);
+
     const apiEndpoint = request.context.System.apiEndpoint;
     const consentToken = request.context.System.user.permissions.consentToken;
     const deviceId = request.context.System.device.deviceId;
+
+    console.log(`API Endpoint: ${apiEndpoint}`);
+    console.log(`ConsentToken: ${consentToken}`);
+    console.log(`Device ID: ${deviceId}`);
 
     if (consentToken && deviceId) {
         return getAddressForDeviceAsync(apiEndpoint, deviceId, consentToken);
