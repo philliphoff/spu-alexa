@@ -8,12 +8,12 @@ declare module 'alexa-app' {
     }
 
     export interface IAlexaUser {
-        permissions: IAlexaUserPermissions;
+        permissions?: IAlexaUserPermissions;
         userId: string;
     }
 
     export interface IAlexaSystem {
-        apiEndpoint: string;
+        apiEndpoint?: string;
         device: IAlexaDevice;
         user: IAlexaUser;
     }
